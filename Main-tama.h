@@ -13,50 +13,58 @@ private:
 	string name;
 	string gender;
 	int age;
-	int weight;
-	int hunger, happiness; //Max hearts = 4
+	float weight;
+	float hunger, happiness; //Max hearts = 4
 	int discipline;
 	bool poop;
 	bool sick;
+	bool lights;
+	bool sleep;
 
 public:
 	//Default constructor 
-	Main_tama() {
-		name = gender = ' ';
-		age = weight = hunger = happiness = discipline = 0;
-		poop = sick = false;
-	}
+	Main_tama();
+	//Age groups will have own list of random events
+	virtual void rand_events();
 	//Age groups will have own feed function
-	virtual feed();
+	virtual void feed();
 	void game();
-	void clean(int time_pooped);
+	void clean(time_t time_pooped);
 	void medicine();
-	void lights();
-	void print_info();
+	void light_controls();
+	virtual void print_info();
 	//Makes sure that happiness and hunger don't exceed 4
-	void increase_happiness();
-	void increase_hunger();
+	void increase_happiness(float n);
+	void increase_hunger(float n);
+	void print_menu();
+
+	//Functions that let tamagotchi do on own
+	void sleeps();
 
 	//Getters and setters
 	set_name(string n);
 	set_gender(string s);
 	set_age(int a);
-	set_weight(int w);
-	set_hunger(int h);
-	set_happiness(int h);
+	set_weight(float w);
+	set_hunger(float h);
+	set_happiness(float h);
 	set_discipline(int d);
 	set_poop(bool p);
 	set_sick(bool s);
+	set_lights(bool l);
+	set_sleep(bool s);
 
 	string get_name();
 	string get_gender();
 	int get_age();
-	int get_weight();
-	int get_hunger();
-	int get_happiness();
+	float get_weight();
+	float get_hunger();
+	float get_happiness();
 	int get_discipline();
 	bool get_poop();
 	bool get_sick();
+	bool get_lights();
+	bool get_sleep();
 };
 
 #endif // MAIN_TAMA_H
