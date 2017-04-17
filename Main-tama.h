@@ -7,6 +7,8 @@
 #include <string>
 using namespace std;
 
+void clear_screen();
+
 class Main_tama {
 
 private:
@@ -15,7 +17,7 @@ private:
 	int age;
 	float weight;
 	float hunger, happiness; //Max hearts = 4
-	int discipline;
+	int discipline; //Max 10
 	bool poop;
 	bool sick;
 	bool lights;
@@ -24,22 +26,33 @@ private:
 public:
 	//Default constructor 
 	Main_tama();
-	//Age groups will have own list of random events
-	virtual void rand_events();
+	//~Main_tama();
+	
 	//Age groups will have own feed function
 	virtual void feed();
 	void game();
 	void clean(time_t time_pooped);
 	void medicine();
 	void light_controls();
-	virtual void print_info();
+	
+	//Pretty Print functions
+	void print_info();
+	void print_egg();
+	void main_menu();
+	void print_blank();
+	virtual void print_menu();
+	virtual void print_male();
+	virtual void print_female();
+
+	//Age groups will have own list of random events
+	virtual void rand_events();
+
 	//Makes sure that happiness and hunger don't exceed 4
 	void increase_happiness(float n);
 	void increase_hunger(float n);
-	void print_menu();
-
+	
 	//Functions that let tamagotchi do on own
-	void sleeps();
+	void sleeps(); //Turn light back on when it wakes up
 
 	//Getters and setters
 	set_name(string n);
@@ -68,3 +81,4 @@ public:
 };
 
 #endif // MAIN_TAMA_H
+

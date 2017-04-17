@@ -4,18 +4,22 @@
 #ifndef BABY_TAMA_H
 #define BABY_TAMA_H
 #include "Main-tama.h"
+#include <string>
+#include <iostream>
 
 class Baby_tama : public Main_tama {
 
 private:
 
 public:
-	Baby_tama() : Main_tama() { }
-	Baby_tama(string n, string g, int a, int h, int ha, int d);
+	Baby_tama(string n, string g, int a, float h, float ha, int d);
+	//~Baby_tama() {}
 
 	virtual void feed();
-	virtual void print_info();
 	virtual void rand_events();
+	virtual void print_male();
+	virtual void print_female();
+	virtual void print_menu();
 };
 
 #endif // BABY_TAMA_H

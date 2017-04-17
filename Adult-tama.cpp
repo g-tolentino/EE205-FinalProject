@@ -34,27 +34,65 @@ void Adult_tama::feed() {
 		cout << "Please choose the type of food.\n"
 			 << "(1) Meal: Pasta\n"
 			 << "(2) Snack: Cheesecake\n"
-			 << "\n";
+			 << "Food Number: ";
 		cin >> user_choice;
 
 		//Based on their choice, adjust weight and hunger
 		if(user_choice == 1) { //MEAL
 			increase_hunger(1.5);
 			set_weight(get_weight() + 1);
+			return;
 		}
 		else { //SNACK
 			increase_hunger(1);
 			set_weight(get_weight() + 1);
 			increase_happiness(1);
+			return;
 		}
 	}
 }
 
-void Adult_tama::print_info() {
-	cout << "Stage in life: Adult\n";
-	Main_tama::print_info();
+void Adult_tama::print_female() {
+	cout << "\n╔═══════════════════════════════════════════════╗"
+		 << "\n║                     ︵   ︵                   ║"
+		 << "\n║                    | |  | |                   ║"
+		 << "\n║                   _| |__| |_                  ║"
+		 << "\n║                  |          |                 ║"
+		 << "\n║                  |  ό    ό  |                 ║"
+		 << "\n║                  | ੭  ᗜ     |੭                ║"
+		 << "\n║                  |__________|                 ║"
+		 << "\n║                                               ║"
+		 << "\n║                                               ║";
 }
 
-void rand_events() {
+void Adult_tama::print_male() {
+	cout << "\n╔═══════════════════════════════════════════════╗"
+		 << "\n║                     ︵   ︵                   ║"
+		 << "\n║                    | |  | |                   ║"
+		 << "\n║                   _| |__| |_                  ║"
+		 << "\n║                  |          |                 ║"
+		 << "\n║                  |   ಠ   ಠ  |                 ║"
+		 << "\n║                 ┗|    -     |┛                ║"
+		 << "\n║                  |__________|                 ║"
+		 << "\n║                                               ║"
+		 << "\n║                                               ║";
+}
+
+void Adult_tama::print_menu() {
+	if(get_lights() == false) {
+		print_blank();
+	}
+	else {
+		if(get_gender() == "male") {
+			Adult_tama::print_male();
+		}
+		else {
+			Adult_tama::print_female();
+		}
+	}
+	main_menu();
+}
+
+void Adult_tama::rand_events() {
 
 }

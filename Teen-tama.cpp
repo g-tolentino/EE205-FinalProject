@@ -37,27 +37,65 @@ void Teen_tama::feed() {
 		cout << "Please choose the type of food.\n"
 			 << "(1) Meal: Omelet\n"
 			 << "(2) Snack: Sundae\n"
-			 << "\n";
+			 << "Food Number: ";
 		cin >> user_choice;
 
 		//Based on their choice, adjust weight and hunger
 		if(user_choice == 1) { //MEAL
 			increase_hunger(1.5);
 			set_weight(get_weight() + 1);
+			return;
 		}
 		else { //SNACK
 			increase_hunger(1);
 			set_weight(get_weight() + 0.5);
 			increase_happiness(1);
+			return;
 		}
 	}
 }
 
-void Teen_tama::print_info() {
-	cout << "Stage in life: Teen\n";
-	Main_tama::print_info();
+void Teen_tama::print_female() {
+	cout << "\n╔═══════════════════════════════════════════════╗"
+		 << "\n║                                               ║"
+		 << "\n║                     ︵   ︵                   ║"
+		 << "\n║                   _| |__| |_                  ║"
+		 << "\n║                  |          |                 ║"
+		 << "\n║                  |  ○    ○  |                 ║"
+		 << "\n║                  | ੭   w    |੭                ║"
+		 << "\n║                  |__________|                 ║"
+		 << "\n║                                               ║"
+		 << "\n║                                               ║";
 }
 
-void rand_events() {
+void Teen_tama::print_male() {
+	cout << "\n╔═══════════════════════════════════════════════╗"
+		 << "\n║                                               ║"
+		 << "\n║                     ︵   ︵                   ║"
+		 << "\n║                   _| |__| |_                  ║"
+		 << "\n║                  |          |                 ║"
+		 << "\n║                  |  ○`  ´○  |                 ║"
+		 << "\n║                  | っ   ౪   |っ               ║"
+		 << "\n║                  |__________|                 ║"
+		 << "\n║                                               ║"
+		 << "\n║                                               ║";
+}
+
+void Teen_tama::print_menu() {
+	if(get_lights() == false) {
+		print_blank();
+	}
+	else {
+		if(get_gender() == "male") {
+			Teen_tama::print_male();
+		}
+		else {
+			Teen_tama::print_female();
+		}
+	}
+	main_menu();
+}
+
+void Teen_tama::rand_events() {
 
 }

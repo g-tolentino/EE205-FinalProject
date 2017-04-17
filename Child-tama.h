@@ -11,11 +11,13 @@ class Child_tama : public Main_tama {
 private:
 
 public:
-	Child_tama() : Main_tama() { }
 	Child_tama(string n, string g, int a, int h, int ha, int d);
+	//~Child_tama() {}
 
 	virtual void feed();
-	virtual void print_info();
 	virtual void rand_events();
+	virtual void print_male();
+	virtual void print_female();
+	virtual void print_menu();
 };
 #endif // CHILD_TAMA_H

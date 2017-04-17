@@ -37,28 +37,66 @@ void Child_tama::feed() {
 		cout << "Please choose the type of food.\n"
 			 << "(1) Meal: Sandwich\n"
 			 << "(2) Snack: Chocolate\n"
-			 << "\n";
+			 << "Food Number: ";
 		cin >> user_choice;
 
 		//Based on their choice, adjust weight and hunger
 		if(user_choice == 1) { //MEAL
 			increase_hunger(2);
 			set_weight(get_weight() + 1);
+			return;
 		}
 		else { //SNACK
 			increase_hunger(0.5);
 			set_weight(get_weight() + 0.5);
 			increase_happiness(1.5);
+			return;
 		}
 	}
 }
 
-void Child_tama::print_info() {
-	cout << "Stage in life: Child\n";
-	Main_tama::print_info();
+void Child_tama::print_female() {
+	cout << "\n╔═══════════════════════════════════════════════╗"
+		 << "\n║                                               ║"
+		 << "\n║                                               ║"
+		 << "\n║                   __へ__へ__                  ║"
+		 << "\n║                  |          |                 ║"
+		 << "\n║                  | ᗒ      ᗕ |                 ║"
+		 << "\n║                  | ੭   ³    |੭                ║"
+		 << "\n║                  |__________|                 ║"
+		 << "\n║                                               ║"
+		 << "\n║                                               ║";
 }
 
-void rand_events() {
+void Child_tama::print_male() {
+	cout << "\n╔═══════════════════════════════════════════════╗"
+		 << "\n║                                               ║"
+		 << "\n║                                               ║"
+		 << "\n║                   __へへへ__                  ║"
+		 << "\n║                  |          |                 ║"
+		 << "\n║                  |  •    •  |                 ║"
+		 << "\n║                  | っ   ×   |っ               ║"
+		 << "\n║                  |__________|                 ║"
+		 << "\n║                                               ║"
+		 << "\n║                                               ║";
+}
+
+void Child_tama::print_menu() {
+	if(get_lights() == false) {
+		print_blank();
+	}
+	else {
+		if(get_gender() == "male") {
+			Child_tama::print_male();
+		}
+		else {
+			Child_tama::print_female();
+		}
+	}
+	main_menu();
+}
+
+void Child_tama::rand_events() {
 	//Children like to play more
 	//If neglected a lot then happiness goes down
 }

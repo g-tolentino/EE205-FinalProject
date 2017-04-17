@@ -7,41 +7,38 @@
 #include <time.h>
 using namespace std;
 
+void clear_screen() {
+	for(int i = 0; i < 50 < i++;) {
+		cout << "\n ";
+	}
+}
+
 Main_tama::Main_tama() {
 	name = gender = ' ';
 	age = weight = hunger = happiness = discipline = 0;
 	poop = sick = sleep = false;
+	lights = true;
 }
 
-void Main_tama::increase_happiness(float n) {
-	happiness = happiness + n;
-	if(happiness > 4) { happiness = 4; }
-	if(happiness < 0) { happiness = 0; }
-}
-void Main_tama::increase_hunger(float n) {
-	hunger = hunger + n;
-	if(hunger > 4) { hunger = 4; }
-	if(hunger < 0) { hunger = 0; }
-}
+void Main_tama::feed() {cout << "\n";}
 
 //Plays game with tamagotchi
 void Main_tama::game() {
 	int rounds = 0;
 	int wins = 0;
 	
-	while(rounds != 5) {
+	while(rounds < 5) {
 		
 		//Randomly choose left or right 
 		int tama_choice = rand()%100;
 		
 		//Ask user for their choice
 		int user_choice;
-		cout << "---------- Round #" << rounds + 1 << " ----------\n";
-		cout << "Choose either (1)Left, (2)Right, or (3)Quit: ";
+		cout << "\n---------- Round #" << rounds + 1 << " ----------";
+		cout << "\nChoose either (1)Left or (2)Right: ";
 		cin >> user_choice;
 		
 		//Decide if they won or not
-		if(user_choice == 3) { return; } //Quit
 		if(tama_choice <= 50 && user_choice == 1) { //Both Left
 			cout << "You got it correct!\n";
 			wins++;
@@ -53,10 +50,14 @@ void Main_tama::game() {
 		else { //Lossed
 			cout << "You got it wrong!\n";
 		}
+		rounds++;
 	}
+	cout << "\n";
+	cout << "You won " << wins << " time(s)!\n"; 
 	
 	//Increase happiness if user won 3 or more
 	if(wins >= 3) { increase_happiness(0.5); }
+	return;
 }
 
 //Cleans the tamagotchi's poop
@@ -66,9 +67,13 @@ void Main_tama::clean(time_t time_pooped) {
 	int time_diff = difftime(time_pooped, now);
 	
 	//User cleaned up poop in time
-	if(time_diff <= 20) { increase_happiness(0.5); }
+	if(time_diff <= 20) { 
+		poop = false;
+		increase_happiness(0.5); 
+		return;
+	}
 	//User did not clean up in time
-	else { sick = true; } 
+	else { sick = true; return;} 
 }
 
 //Gives medicine to tamagotchi
@@ -86,7 +91,7 @@ void Main_tama::medicine() {
 	//Tamgotchi is sick
 	cout << name << " needs " << need << " injection(s).\n";
 	while(injections != need) {
-		cout << "Would you like to give it medicine? (1)Yes (2)No\n";
+		cout << "\nWould you like to give it medicine? (1)Yes (2)No: ";
 		cin >> user_choice;
 		if(user_choice == 1) {
 			injections++;
@@ -99,19 +104,21 @@ void Main_tama::medicine() {
 	//Tamas don't like getting injections
 	increase_happiness(-1);
 	sick = false;
+	return;
 }
 
 //Controls the lights 
 void Main_tama::light_controls() {
 	int user_choice;
 	cout << "Would you like to turn the lights (1)ON or (2)OFF?\n";
+	cin >> user_choice;
 	
 	//Tamagotchi is sleeping
 	if(sleep == true) { 
 		//Turn off lights
-		if(user_choice == 2) { lights = false; }
+		if(user_choice == 2) { lights = false; return;}
 		//Turn on lights
-		else { lights = true; }
+		else { lights = true; return;}
 	}
 	
 	//Tamagotchi is not sleeping
@@ -119,52 +126,118 @@ void Main_tama::light_controls() {
 		//Turn off lights
 		if(user_choice == 2) {
 			cout << name << " can't see anything, please turn on light.\n";
-			lights == false;
+			lights = false;
+			return;
 		}
 		//Turn on lights
-		else { lights = true; }
+		else { lights = true; return;}
 	}
+
+	return;
 }
+
+///////////////////////////////////////////////
+//////////// Pretty Print functions ///////////
+///////////////////////////////////////////////
 
 //NEED TO ACCOUNT FOR 1/2 Hearts
 void Main_tama::print_info() {
-	cout << "\nName: " << name
-		 << "\nGender: " << gender 
-		 << "\nAge / Weight: " << age << " / " << weight;
-	cout << "Hunger: ";
-	for(int h = 0; h < hunger; h++) {
-		cout << "+";
-	}
-	cout << "Happiness: ";
-	for(int h = 0; h < happiness; h++) {
-		cout << "+";
-	}
-	cout << "Discipline: ";
-	for(int h = 0; h < discipline; h++) {
-		cout << "+";
-	}
+	cout << "\n╔═══════════════════════════════════════════════╗"
+		 << "\n║            Tamagotchi Information:            ║"
+		 << "\n╚═══════════════════════════════════════════════╝"
+		 << "\n\tName: " << name
+		 << "\n\tGender: " << gender 
+		 << "\n\tAge / Weight: " << age << " / " << weight
+		 << "\n\tHunger: " << hunger
+		 << "\n\tHappiness: " << happiness
+		 << "\n\tDiscipline: " << discipline;
+	return;
 }
 
-void Main_tama::print_menu() {
-	cout << "\n";
-	if(poop == true) {
-		cout << name << " just pooped!\n";
-	}
-	if(sick == true) { 
-		cout << name << " is sick!\n";
-	}
-	cout << "\n";
-	cout << "----------- Menu -----------\n"
-		 << "(1) Play a Game\n"
-		 << "(2) Feed\n"
-		 << "(3) Clean\n"
-		 << "(4) Give Medicine\n"
-		 << "(5) Lights\n"
-		 << "(6) Check Health/Info\n";
-	cout << "\n";
+void Main_tama::print_egg() {
+	cout << "\n╔═══════════════════════════════════════════════╗ "
+	 	 << "\n║                                               ║ "
+	 	 << "\n║                    _________                  ║ "
+		 << "\n║                   /         \\                 ║ "
+	 	 << "\n║                  |           |                ║ "
+	 	 << "\n║                  |   ❤ ❤ ❤   |                ║ "
+	 	 << "\n║                  |           |                ║ "
+	 	 << "\n║                   \\_________/                 ║ "
+		 << "\n║                                               ║ "
+	 	 << "\n║                                               ║ ";
+	return;
 }
+
+void Main_tama::print_blank() {
+	cout << "\n╔═══════════════════════════════════════════════╗ "
+	 	 << "\n║                                               ║ "
+	 	 << "\n║                                               ║ "
+		 << "\n║                                               ║ "
+	 	 << "\n║                                               ║ "
+	 	 << "\n║                                               ║ "
+	 	 << "\n║                                               ║ "
+	 	 << "\n║                                               ║ "
+		 << "\n║                                               ║ "
+	 	 << "\n║                                               ║ ";
+	return;
+}
+
+void Main_tama::main_menu() {
+	if(age == 0) {
+		print_egg();
+	}
+	cout << "\n╟═══════════════════════════════════════════════╢"
+		 << "\n║                    Message:                   ║";
+	
+	if(lights == false) {
+		cout << "\n║       -Lights are currently off               ║";
+	}		
+
+	if(sleep == true) {
+		cout << "\n║       -Tamagotchi is sleeping                 ║";
+	} 
+
+	if(poop == true) {
+		cout << "\n║       -Health Status: Tamagotchi pooped       ║";
+	}
+
+	if(sick == true) { 
+		cout << "\n║       -Health Status: Tamagotchi is sick      ║";
+	}
+		
+	cout << "\n╟═══════════════════════════════════════════════╢ "
+		 << "\n║                     Menu:                     ║ "
+		 << "\n╟═══════════════╦═══════════════╦═══════════════╢ "
+		 << "\n║    1. Game    ║    2. Feed    ║   3. Clean    ║ "
+		 << "\n╟───────────────╫───────────────╫───────────────╢ "
+		 << "\n║    4. Meds    ║   5. Lights   ║   6. Info     ║ "
+		 << "\n╚═══════════════╩═══════════════╩═══════════════╝ ";
+	return;
+}
+
+void Main_tama::print_menu() {cout << "\n";}
+void Main_tama::print_male() {cout << "\n";}
+void Main_tama::print_female() {cout << "\n";}
+
+///////////////////////////////////////////////
+/////////////// Other Functions ///////////////
+///////////////////////////////////////////////
 
 //Happens when tamagotchi is sleeping
+void Main_tama::rand_events() {cout << "\n";}
+
+void Main_tama::increase_happiness(float n) {
+	happiness = happiness + n;
+	if(happiness > 4) { happiness = 4; return;}
+	if(happiness < 0) { happiness = 0; return;}
+}
+
+void Main_tama::increase_hunger(float n) {
+	hunger = hunger + n;
+	if(hunger > 4) { hunger = 4; return;}
+	if(hunger < 0) { hunger = 0; return;}
+}
+
 void Main_tama::sleeps() {
 	//Randomly determine how long to sleep
 
@@ -175,8 +248,10 @@ void Main_tama::sleeps() {
 	//When done sleeping automatically turn lights on
 }
 
+///////////////////////////////////////////////
+///////////// Getters and setters /////////////
+///////////////////////////////////////////////
 
-//Getters and setters
 Main_tama::set_name(string n) { name = n; }
 Main_tama::set_gender(string s) { gender = s; }
 Main_tama::set_age(int a) { age = a; }
