@@ -55,17 +55,17 @@ public:
 	void sleeps(); //Turn light back on when it wakes up
 
 	//Getters and setters
-	set_name(string n);
-	set_gender(string s);
-	set_age(int a);
-	set_weight(float w);
-	set_hunger(float h);
-	set_happiness(float h);
-	set_discipline(int d);
-	set_poop(bool p);
-	set_sick(bool s);
-	set_lights(bool l);
-	set_sleep(bool s);
+	void set_name(string n);
+	void set_gender(string s);
+	void set_age(int a);
+	void set_weight(float w);
+	void set_hunger(float h);
+	void set_happiness(float h);
+	void set_discipline(int d);
+	void set_poop(bool p);
+	void set_sick(bool s);
+	void set_lights(bool l);
+	void set_sleep(bool s);
 
 	string get_name();
 	string get_gender();

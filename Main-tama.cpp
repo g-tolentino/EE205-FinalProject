@@ -252,17 +252,17 @@ void Main_tama::sleeps() {
 ///////////// Getters and setters /////////////
 ///////////////////////////////////////////////
 
-Main_tama::set_name(string n) { name = n; }
-Main_tama::set_gender(string s) { gender = s; }
-Main_tama::set_age(int a) { age = a; }
-Main_tama::set_weight(float w) { weight = w; }
-Main_tama::set_hunger(float h) { hunger = h; }
-Main_tama::set_happiness(float h) { happiness = h; }
-Main_tama::set_discipline(int d) { discipline = d; }
-Main_tama::set_poop(bool p) { poop = p; }
-Main_tama::set_sick(bool s) { sick = s; }
-Main_tama::set_lights(bool l) { lights = l; }
-Main_tama::set_sleep(bool s) { lights = s; }
+void Main_tama::set_name(string n) { name = n; }
+void Main_tama::set_gender(string s) { gender = s; }
+void Main_tama::set_age(int a) { age = a; }
+void Main_tama::set_weight(float w) { weight = w; }
+void Main_tama::set_hunger(float h) { hunger = h; }
+void Main_tama::set_happiness(float h) { happiness = h; }
+void Main_tama::set_discipline(int d) { discipline = d; }
+void Main_tama::set_poop(bool p) { poop = p; }
+void Main_tama::set_sick(bool s) { sick = s; }
+void Main_tama::set_lights(bool l) { lights = l; }
+void Main_tama::set_sleep(bool s) { lights = s; }
 
 string Main_tama::get_name() { return name; }
 string Main_tama::get_gender() { return gender; }
