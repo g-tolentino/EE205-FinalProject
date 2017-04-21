@@ -136,6 +136,10 @@ void Main_tama::light_controls() {
 	return;
 }
 
+void Main_tama::save_tama() {
+	
+}
+
 ///////////////////////////////////////////////
 //////////// Pretty Print functions ///////////
 ///////////////////////////////////////////////
@@ -214,7 +218,9 @@ void Main_tama::main_menu() {
 		 << "\n║    1. Game    ║    2. Feed    ║   3. Clean    ║ "
 		 << "\n╟───────────────╫───────────────╫───────────────╢ "
 		 << "\n║    4. Meds    ║   5. Lights   ║   6. Info     ║ "
-		 << "\n╚═══════════════╩═══════════════╩═══════════════╝ ";
+		 << "\n╟═══════════════╩═══════════════╩═══════════════╢ "
+		 << "\n║              7. Save Tamagotchi               ║ "
+		 << "\n╚═══════════════════════════════════════════════╝ ";
 	return;
 }
 
@@ -266,6 +272,7 @@ void Main_tama::set_poop(bool p) { poop = p; }
 void Main_tama::set_sick(bool s) { sick = s; }
 void Main_tama::set_lights(bool l) { lights = l; }
 void Main_tama::set_sleep(bool s) { lights = s; }
+void Main_tama::set_sleepy(bool y) { sleepy = y; }
 
 string Main_tama::get_name() { return name; }
 string Main_tama::get_gender() { return gender; }
@@ -278,3 +285,4 @@ bool Main_tama::get_poop() { return poop; }
 bool Main_tama::get_sick() { return sick; }
 bool Main_tama::get_lights() { return lights; }
 bool Main_tama::get_sleep() { return sleep; }
+bool Main_tama::get_sleepy() { return sleepy; }

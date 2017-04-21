@@ -22,6 +22,7 @@ private:
 	bool sick;
 	bool lights;
 	bool sleep;
+	bool sleepy;
 
 public:
 	//Default constructor 
@@ -34,6 +35,7 @@ public:
 	void clean(time_t time_pooped);
 	void medicine();
 	void light_controls();
+	void save_tama();
 	
 	//Pretty Print functions
 	void print_info();
@@ -66,6 +68,7 @@ public:
 	void set_sick(bool s);
 	void set_lights(bool l);
 	void set_sleep(bool s);
+	void set_sleepy(bool y);
 
 	string get_name();
 	string get_gender();
@@ -78,6 +81,7 @@ public:
 	bool get_sick();
 	bool get_lights();
 	bool get_sleep();
+	bool get_sleepy();
 };
 
 #endif // MAIN_TAMA_H
