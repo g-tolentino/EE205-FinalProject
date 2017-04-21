@@ -188,6 +188,9 @@ void Main_tama::main_menu() {
 	}
 	cout << "\n╟═══════════════════════════════════════════════╢"
 		 << "\n║                    Message:                   ║";
+	if(age == 0) {
+		cout << "\n║       -Status: Waiting for egg to hatch       ║";
+	}
 	
 	if(lights == false) {
 		cout << "\n║       -Lights are currently off               ║";
