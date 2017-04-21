@@ -93,5 +93,34 @@ void Baby_tama::print_menu() {
 }
 
 void Baby_tama::rand_events() {
+	time(&current_t);
+	int x;
+	x = diff(current_t,last_event) / 5;
+	increase_hunger(-x*0.5);
+	hungerdrops += x; //for every 2 hunger drops, Tama will poop
+	for (hungerdrops < 1){
+		hungerdrops -= 2;
+		poop = true;
+	}
+	x = x / 2;
+	increase_happiness(-x*0.5);
+	if (diff(current_t,last_sleep) >= 20 && sleepy == false){
+		sleepy=true;
+		time(&tired_t);
+	}
+	if (sleepy == true && diff(current_t,tired_t) >=10){
+		sleep = true;
+		time(&sleep_t);
+		sleeping = rand()%10 + 10; //set random sleep time
+	}
+	if (sleep == true && diff(current_t,sleep_t) >= sleeping){
+		sleep = false;
+		sleepy = false;
+		if (light == false){
+			light = true;//Tama automatically turns on light when wakes up
+		}
+	}
+	last_event = current_t;
+
 	//Babies poop more and sleep more
 }

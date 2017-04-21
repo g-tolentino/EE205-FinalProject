@@ -22,6 +22,11 @@ private:
 	bool sick;
 	bool lights;
 	bool sleep;
+	time_t start_t;
+	time_t last_event;
+	time_t last_sleep; //set = to start when changes
+	time_t current_t;
+	int sleeping;
 
 public:
 	//Default constructor 
