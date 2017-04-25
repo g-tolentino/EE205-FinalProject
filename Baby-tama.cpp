@@ -4,6 +4,7 @@
 #include "Baby-tama.h"
 #include <iostream>
 #include <string>
+#include <time.h>
 using namespace std;
 
 Baby_tama::Baby_tama(string n, string g, int a, float h, float ha, int d) {
@@ -20,6 +21,8 @@ Baby_tama::Baby_tama(string n, string g, int a, float h, float ha, int d) {
 
 //Meal = milk, snack = cookie
 void Baby_tama::feed() {
+	if(get_sleep() == true) { return; }
+
 	//Tamagotchi is full, does not need to eat
 	if(get_hunger() == 4) {
 		cout << get_name() << " is full\n";
@@ -48,6 +51,7 @@ void Baby_tama::feed() {
 			return;
 		}
 	}
+	return;
 }
 
 void Baby_tama::print_female() {
@@ -93,34 +97,33 @@ void Baby_tama::print_menu() {
 }
 
 void Baby_tama::rand_events() {
+	time_t tired_t;
+	time_t sleep_t;
 	time(&current_t);
 	int x;
-	x = diff(current_t,last_event) / 5;
+	x = difftime(current_t,last_event) / 5;
 	increase_hunger(-x*0.5);
-	hungerdrops += x; //for every 2 hunger drops, Tama will poop
-	for (hungerdrops < 1){
-		hungerdrops -= 2;
-		poop = true;
+	//hungerdrops += x; //for every 2 hunger drops, Tama will poop
+	for ( ; get_hunger() < 1; increase_hunger(-2)) {
+		set_poop(true);
 	}
 	x = x / 2;
 	increase_happiness(-x*0.5);
-	if (diff(current_t,last_sleep) >= 20 && sleepy == false){
-		sleepy=true;
+	if (difftime(current_t,last_sleep) >= 20 && sleepy == false){
+		sleepy = true;
 		time(&tired_t);
 	}
-	if (sleepy == true && diff(current_t,tired_t) >=10){
-		sleep = true;
+	if (sleepy == true && difftime(current_t,tired_t) >=10){
+		set_sleep(true);
 		time(&sleep_t);
 		sleeping = rand()%10 + 10; //set random sleep time
 	}
-	if (sleep == true && diff(current_t,sleep_t) >= sleeping){
-		sleep = false;
+	if (get_sleep() == true && difftime(current_t,sleep_t) >= sleeping){
+		set_sleep(false);
 		sleepy = false;
-		if (light == false){
-			light = true;//Tama automatically turns on light when wakes up
+		if (get_lights() == false){
+			set_lights(true);//Tama automatically turns on light when wakes up
 		}
 	}
 	last_event = current_t;
-
-	//Babies poop more and sleep more
 }

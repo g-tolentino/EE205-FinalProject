@@ -7,12 +7,6 @@
 #include <time.h>
 using namespace std;
 
-void clear_screen() {
-	for(int i = 0; i < 50 < i++;) {
-		cout << "\n ";
-	}
-}
-
 Main_tama::Main_tama() {
 	name = gender = ' ';
 	age = weight = hunger = happiness = discipline = 0;
@@ -26,8 +20,10 @@ void Main_tama::feed() {cout << "\n";}
 void Main_tama::game() {
 	int rounds = 0;
 	int wins = 0;
+
+	if(sleep == true) { return; }
 	
-	while(rounds < 5) {
+	while(rounds != 5) {
 		
 		//Randomly choose left or right 
 		int tama_choice = rand()%100;
@@ -62,6 +58,9 @@ void Main_tama::game() {
 
 //Cleans the tamagotchi's poop
 void Main_tama::clean(time_t time_pooped) {
+	if(sleep == true) { return; }
+	if(poop == false) { return; }
+
 	//Get time now and calculate time diff
 	time_t now = time(&now);
 	int time_diff = difftime(time_pooped, now);
@@ -78,6 +77,8 @@ void Main_tama::clean(time_t time_pooped) {
 
 //Gives medicine to tamagotchi
 void Main_tama::medicine() {
+	if(sleep == true) { return; }
+	
 	int injections = 0;
 	int user_choice;
 	int need = rand()%3;
@@ -85,25 +86,26 @@ void Main_tama::medicine() {
 	//Tamagotchi isn't sick
 	if(sick == false) { 
 		cout << name << " does not need medicine\n"; 
-		return; 
 	}
-	
-	//Tamgotchi is sick
-	cout << name << " needs " << need << " injection(s).\n";
-	while(injections != need) {
-		cout << "\nWould you like to give it medicine? (1)Yes (2)No: ";
-		cin >> user_choice;
-		if(user_choice == 1) {
-			injections++;
-			cout << "Giving medicine #" << injections << "\n";
+	else {
+		//Tamgotchi is sick
+		cout << name << " needs " << need << " injection(s).\n";
+		while(injections != need) {
+			cout << "\nWould you like to give it medicine? (1)Yes (2)No: ";
+			cin >> user_choice;
+			if(user_choice == 1) {
+				injections++;
+				cout << "Giving medicine #" << injections << "\n";
+			}
+			else {
+				return;
+			}
 		}
-		else {
-			return;
-		}
+		//Tamas don't like getting injections
+		increase_happiness(-1);
+		sick = false;
+		return;
 	}
-	//Tamas don't like getting injections
-	increase_happiness(-1);
-	sick = false;
 	return;
 }
 
@@ -218,9 +220,9 @@ void Main_tama::main_menu() {
 		 << "\n║    1. Game    ║    2. Feed    ║   3. Clean    ║ "
 		 << "\n╟───────────────╫───────────────╫───────────────╢ "
 		 << "\n║    4. Meds    ║   5. Lights   ║   6. Info     ║ "
-		 << "\n╟═══════════════╩═══════════════╩═══════════════╢ "
-		 << "\n║              7. Save Tamagotchi               ║ "
-		 << "\n╚═══════════════════════════════════════════════╝ ";
+		 << "\n╟═══════════════╩═══════╦═══════╩═══════════════╢ "
+		 << "\n║  7. Save Tamagotchi   ║     8. Do nothing     ║ "
+		 << "\n╚═══════════════════════╩═══════════════════════╝ ";
 	return;
 }
 
@@ -235,6 +237,37 @@ void Main_tama::print_female() {cout << "\n";}
 //Happens when tamagotchi is sleeping
 void Main_tama::rand_events() {cout << "\n";}
 
+void Main_tama::operation_selected(int user_choice) {
+	time_t now;
+	switch(user_choice) {
+		case 1:
+			game();
+			break;
+		case 2:
+			feed();
+			break;
+		case 3:
+			clean(time(&now)); //********************
+			break;
+		case 4:
+			medicine();
+			break;
+		case 5:
+			light_controls();
+			break;
+		case 6:
+			print_info();
+			break;
+		case 7:
+			save_tama();
+			break;
+		default: 
+			cout << "Sorry, that is not an option.\n";
+			break;
+	}
+	return;
+}
+
 void Main_tama::increase_happiness(float n) {
 	happiness = happiness + n;
 	if(happiness > 4) { happiness = 4; return;}
@@ -245,6 +278,73 @@ void Main_tama::increase_hunger(float n) {
 	hunger = hunger + n;
 	if(hunger > 4) { hunger = 4; return;}
 	if(hunger < 0) { hunger = 0; return;}
+}
+
+void Main_tama::increase_age(int t_diff) {
+	//Baby
+	if(t_diff >= 30 && t_diff < 60) {
+		age = 2;
+	}
+	else if(t_diff >= 60 && t_diff < 120) {
+		age = 3;
+	}
+
+	//Child
+	else if(t_diff >= 120 && t_diff < 140) {
+		age = 4;
+	}
+	else if(t_diff >= 140 && t_diff < 180) {
+		age = 5;
+	}
+	else if(t_diff >= 180 && t_diff < 200) {
+		age = 6;
+	}
+	else if(t_diff >= 200 && t_diff < 220) {
+		age = 7;
+	}
+	else if(t_diff >= 220 && t_diff < 240) {
+		age = 8;
+	}
+	else if(t_diff >= 280 && t_diff < 300) {
+		age = 9;
+	}
+	else if(t_diff >= 300 && t_diff < 320) {
+		age = 10;
+	}
+
+	//Teen
+	else if(t_diff >= 320 && t_diff < 340) {
+		age = 11;
+	}
+	else if(t_diff >= 340 && t_diff < 360) {
+		age = 12;
+	}
+	else if(t_diff >= 360 && t_diff < 380) {
+		age = 13;
+	}
+	else if(t_diff >= 380 && t_diff < 400) {
+		age = 14;
+	}
+	else if(t_diff >= 400 && t_diff < 420) {
+		age = 15;
+	}
+	else if(t_diff >= 420 && t_diff < 440) {
+		age = 16;
+	}
+	else if(t_diff >= 440 && t_diff < 460) {
+		age = 17;
+	}
+	else if(t_diff >= 460 && t_diff < 480) {
+		age = 18;
+	}
+	else if(t_diff >= 480 && t_diff < 500) {
+		age = 19;
+	}
+
+	//Adult
+	else if(t_diff >= 500 && t_diff < 520) {
+		age = 20;
+	}
 }
 
 void Main_tama::sleeps() {
