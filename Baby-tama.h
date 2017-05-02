@@ -12,13 +12,13 @@ class Baby_tama : public Main_tama {
 private:
 
 public:
-	Baby_tama(string n, string g, int a, float h, float ha, int d);
-	//~Baby_tama() {}
+	Baby_tama(string n, string g, int a, float h, float ha, int d, float w);
+	~Baby_tama() {}
 
 	virtual void feed();
 	virtual void rand_events();
-	virtual void print_male();
-	virtual void print_female();
+	virtual void print_male(string s);
+	virtual void print_female(string s);
 	virtual void print_menu();
 };
 
